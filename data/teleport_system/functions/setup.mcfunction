@@ -5,3 +5,9 @@ scoreboard objectives add xTPS dummy
 scoreboard objectives add yTPS dummy
 scoreboard objectives add zTPS dummy
 scoreboard objectives add interaction dummy
+scoreboard objectives add .dx trigger
+scoreboard objectives add .dy trigger
+scoreboard objectives add .dz trigger
+scoreboard objectives add dx dummy
+scoreboard objectives add dy dummy
+scoreboard objectives add dz dummy

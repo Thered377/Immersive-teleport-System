@@ -3,9 +3,9 @@ execute as @e[tag=teleport2] at @s run summon area_effect_cloud ~ ~ ~ {id:"minec
 execute as @e[tag=teleport2] at @s run summon interaction ~ ~ ~ {width:1f,height:1f,response:1b,Tags:["teleport"]}
 execute as @e[tag=teleport2] run kill @s
 execute at @e[nbt={Item:{tag:{kill:1b}}}] as @e[tag=teleport,distance=..1,limit=1] run kill @s
-scoreboard players enable @a .xTPS
-scoreboard players enable @a .yTPS
-scoreboard players enable @a .zTPS
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .xTPS
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .yTPS
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .zTPS
 execute as @a[scores={.xTPS=..-1}] store result score @s xTPS run scoreboard players get @s .xTPS
 execute as @a[scores={.xTPS=1..}] store result score @s xTPS run scoreboard players get @s .xTPS
 execute as @a[scores={.yTPS=..-1}] store result score @s yTPS run scoreboard players get @s .yTPS
@@ -15,8 +15,25 @@ execute as @a[scores={.zTPS=1..}] store result score @s zTPS run scoreboard play
 scoreboard players set @a .xTPS 0
 scoreboard players set @a .yTPS 0
 scoreboard players set @a .zTPS 0
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dx
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dy
+scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dz
+execute as @a[scores={.dx=..-1}] store result score @s dx run scoreboard players get @s .dx
+execute as @a[scores={.dx=1..}] store result score @s dx run scoreboard players get @s .dx
+execute as @a[scores={.dy=..-1}] store result score @s dy run scoreboard players get @s .dy
+execute as @a[scores={.dy=1..}] store result score @s dy run scoreboard players get @s .dy
+execute as @a[scores={.dz=..-1}] store result score @s dz run scoreboard players get @s .dz
+execute as @a[scores={.dz=1..}] store result score @s dz run scoreboard players get @s .dz
+scoreboard players set @a .dx 0
+scoreboard players set @a .dy 0
+scoreboard players set @a .dz 0
 execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] run data modify storage minecraft:tp_macro input set value {"x":0,"y":0,"z":0}
 execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage tp_macro input.x int 1 run scoreboard players get @s .xTPS
 execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage tp_macro input.y int 1 run scoreboard players get @s .yTPS
 execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage tp_macro input.z int 1 run scoreboard players get @s .zTPS
-execute as @a at @s if entity @e[type=area_effect_cloud,tag=teleport,distance=..1] run function teleport_system:tp with storage tp_macro input
+execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] run data modify storage minecraft:d_tp_macro input set value {"dx":0,"dy":0,"dz":0}
+execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage d_tp_macro input.dx int 1 run scoreboard players get @s .dx
+execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage d_tp_macro input.dy int 1 run scoreboard players get @s .dy
+execute as @e[type=area_effect_cloud,tag=teleport] at @s if entity @a[distance=..1] store result storage d_tp_macro input.dz int 1 run scoreboard players get @s .dz
+#execute as @a at @s if entity @e[type=area_effect_cloud,tag=teleport,distance=..1] run function teleport_system:tp with storage tp_macro input
+function teleport_system:d_tp with storage d_tp_macro input
