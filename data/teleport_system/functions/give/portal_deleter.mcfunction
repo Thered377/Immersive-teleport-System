@@ -1,0 +1,1 @@
+give @s stick{HideFlags:1,Enchantments:[{id:"unbreaking",lvl:1}],kill:1b}
