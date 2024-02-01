@@ -6,7 +6,8 @@ execute at @e[nbt={Item:{tag:{kill:1b}}}] as @e[tag=teleport,distance=..1,limit=
 scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .xTPS
 scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .yTPS
 scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .zTPS
-scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dx
-scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dy
-scoreboard players enable @a[nbt={SelectedItem:{tag:{teleport:2b}}}] .dz
-function teleport_system:system/tp with storage tp_macro input
+execute as @e[type=area_effect_cloud,tag=teleport,tag=used] at @s positioned ~-0.5 ~0 ~-0.5 if entity @a[dx=0] run data modify storage minecraft:tp_macro input set value {"x":0,"y":0,"z":0}
+execute as @e[type=area_effect_cloud,tag=teleport,tag=used] at @s positioned ~-0.5 ~0 ~-0.5 if entity @a[dx=0] store result storage tp_macro input.x int 1 run scoreboard players get @s .xTPS
+execute as @e[type=area_effect_cloud,tag=teleport,tag=used] at @s positioned ~-0.5 ~0 ~-0.5 if entity @a[dx=0] store result storage tp_macro input.y int 1 run scoreboard players get @s .yTPS
+execute as @e[type=area_effect_cloud,tag=teleport,tag=used] at @s positioned ~-0.5 ~0 ~-0.5 if entity @a[dx=0] store result storage tp_macro input.z int 1 run scoreboard players get @s .zTPS
+execute at @e[type=area_effect_cloud,tag=teleport,tag=used] positioned ~-0.5 ~0 ~-0.5 as @a[dx=0] at @s run function teleport_system:system/tp with storage tp_macro input
