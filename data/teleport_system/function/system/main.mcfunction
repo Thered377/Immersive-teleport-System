@@ -1,5 +1,7 @@
-execute as @a[nbt={SelectedItem:{tag:{teleport:1b}}}] run item replace entity @s weapon.mainhand with minecraft:endermite_spawn_egg{teleport:2b,EntityTag:{id:"minecraft:area_effect_cloud",Duration:-1,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]}}
-execute as @a[nbt={SelectedItem:{tag:{teleport:1b}}}] run item replace entity @s weapon.mainhand with endermite_spawn_egg{teleport:2b,EntityTag:{id:"minecraft:area_effect_cloud",Duration:-1,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]}}
+execute as @a[nbt={SelectedItem:{tag:{teleport:1b}}}] run item replace entity @s weapon.mainhand with endermite_spawn_egg[entity_data={id:"minecraft:area_effect_cloud",Duration:-2147483648,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]},custom_data={teleport:2b}]
+#{teleport:2b,EntityTag:{id:"minecraft:area_effect_cloud",Duration:-1,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]}}
+execute as @a[nbt={SelectedItem:{tag:{teleport:1b}}}] run item replace entity @s weapon.mainhand with endermite_spawn_egg[entity_data={id:"minecraft:area_effect_cloud",Duration:-2147483648,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]},custom_data={teleport:2b}]
+#{teleport:2b,EntityTag:{id:"minecraft:area_effect_cloud",Duration:-1,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport2"]}}
 execute as @e[tag=teleport2] at @s run summon area_effect_cloud ~ ~ ~ {Duration:-1,Age:-2147483648,WaitTime:-2147483648,Tags:["teleport"]}
 execute as @e[tag=teleport2] at @s run summon interaction ~ ~ ~ {width:1f,height:1f,response:1b,Tags:["teleport"]}
 execute as @e[tag=teleport2] run kill @s
